@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2023 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.superheroes
 
 import android.content.res.Configuration
@@ -66,12 +50,21 @@ fun HeroesList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
+
+    // AnimatedVisibility also offers a variant that takes a
+    // MutableTransitionState. This allows you to trigger an animation
+    // as soon as the AnimatedVisibility is added to the composition tree.
+    // It is also useful for observing the animation state.
+
     val visibleState = remember {
         MutableTransitionState(false).apply {
             // Start the animation immediately.
             targetState = true
         }
     }
+
+    // The AnimatedVisibility composable animates the appearance
+    // and disappearance of its content.
 
     // Fade in entry animation for the entire list
     AnimatedVisibility(
@@ -82,6 +75,9 @@ fun HeroesList(
         exit = fadeOut(),
         modifier = modifier
     ) {
+        //A LazyColumn is a vertically scrolling list that only composes and
+        // lays out the currently visible items. It’s similar to a Recyclerview
+        // in the classic Android View system.
         LazyColumn(contentPadding = contentPadding) {
             itemsIndexed(heroes) { index, hero ->
                 HeroListItem(
@@ -109,6 +105,8 @@ fun HeroListItem(
     hero: Hero,
     modifier: Modifier = Modifier
 ) {
+    // Card is a Material Design-inspired component that provides a surface
+    // with elevation, creating a card-like appearance.
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = modifier,

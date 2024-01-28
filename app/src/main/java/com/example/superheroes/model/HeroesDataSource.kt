@@ -18,6 +18,9 @@ package com.example.superheroes.model
 
 import com.example.superheroes.R
 
+/*R stands for resources, and it is an automatically generated class that contains identifiers for
+all the resources in your Android project.*/
+
 object HeroesRepository {
     val heroes = listOf(
         Hero(
